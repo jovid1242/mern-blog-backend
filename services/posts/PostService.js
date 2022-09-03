@@ -6,6 +6,14 @@ class PostService {
     return await Posts.findAll();
   }
 
+  async getByCategory(category_id) {
+    return await Posts.findAndCountAll({
+      where: {
+        category: category_id,
+      },
+    });
+  }
+
   async getPostById(id) {
     return await Posts.findOne({
       where: { id },

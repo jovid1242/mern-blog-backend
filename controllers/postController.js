@@ -8,13 +8,24 @@ const uuid = require("uuid");
 class PostController {
   async getAll(req, res, next) {
     try {
-      const posts = [];
-      const collections = await PostService.getAll();
+      const posts = await PostService.getAll();
 
-      collections.forEach((el) => {
-        posts.push(new PostDto(el));
+      let arr = posts.sort(function (a, b) {
+        return a.createdAt == b.createdAt
+          ? 0
+          : a.createdAt > b.createdAt
+          ? -1
+          : 1;
       });
+      return res.json({ posts: arr });
+    } catch (e) {
+      next(e);
+    }
+  }
 
+  async getPostsByCategory(req, res, next) {
+    try {
+      const posts = await PostService.getByCategory(req.params.category_id);
       return res.json({ posts });
     } catch (e) {
       next(e);
@@ -99,7 +110,6 @@ class PostController {
   async remove(req, res, next) {
     try {
       let post = await PostService.deletePost(req.params.id);
-
       return res.json({ post });
     } catch (e) {
       next(e);
@@ -123,10 +133,56 @@ class PostController {
       const page = (reqPage - 1) * limits;
       const countPage = Math.round(collections.length / limits);
       const post = await PostService.getByPage(page, limits);
+      let sortPost = post.rows.sort(function (a, b) {
+        return a.createdAt == b.createdAt
+          ? 0
+          : a.createdAt > b.createdAt
+          ? -1
+          : 1;
+      });
       if (countPage === 0) {
-        return res.json({ pages: 1, post });
+        return res.json({
+          pages: 1,
+          post: { count: post.count, rows: sortPost },
+        });
       }
       return res.json({ pages: countPage, post });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getPopularPosts(req, res, next) {
+    try {
+      const posts = await PostService.getAll();
+
+      let arr = posts.sort(function (a, b) {
+        return a.viewCount == b.viewCount
+          ? 0
+          : a.viewCount < b.viewCount
+          ? 1
+          : -1;
+      });
+
+      return res.json({ popularPosts: arr.slice(0, 3) });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getResentPosts(req, res, next) {
+    try {
+      const posts = await PostService.getAll();
+
+      let arr = posts.sort(function (a, b) {
+        return a.createdAt == b.createdAt
+          ? 0
+          : a.createdAt > b.createdAt
+          ? -1
+          : 1;
+      });
+
+      return res.json({ resentPosts: arr.slice(0, 3) });
     } catch (e) {
       next(e);
     }
