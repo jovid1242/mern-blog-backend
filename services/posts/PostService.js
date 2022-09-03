@@ -26,6 +26,13 @@ class PostService {
   async deletePost(id) {
     return Posts.destroy({ where: { id: id } });
   }
+
+  async getByPage(page, limit) {
+    return await Posts.findAndCountAll({
+      offset: page,
+      limit: limit,
+    });
+  }
 }
 
 module.exports = new PostService();

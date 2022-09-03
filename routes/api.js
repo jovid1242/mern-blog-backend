@@ -5,6 +5,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const adminMiddleware = require("../middlewares/adminMiddleware");
 const authController = require("../controllers/authController");
 const postController = require("../controllers/postController");
+const path = require("path");
 
 router.post(
   "/register",
@@ -26,5 +27,12 @@ router.get("/posts/:id", postController.getOne);
 router.post("/posts", postController.create);
 router.delete("/posts/:id", postController.remove);
 router.patch("/posts/:id", postController.update);
+router.get("/posts-page", postController.getByPage);
+
+// get image file
+router.get("/image/:img", (req, res) => {
+  const fileName = req.params.img;
+  res.sendFile(path.join(__dirname + "/../uploads", "images/") + fileName);
+});
 
 module.exports = router;

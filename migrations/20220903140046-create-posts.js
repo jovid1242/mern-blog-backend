@@ -20,6 +20,9 @@ module.exports = {
       viewCount: {
         type: Sequelize.INTEGER,
       },
+      category: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

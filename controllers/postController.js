@@ -42,6 +42,7 @@ class PostController {
         text: params.text,
         imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
         viewCount: 0,
+        category: params.category,
       };
 
       const data = await PostService.createPost(post);
@@ -73,6 +74,7 @@ class PostController {
           text: params.text,
           imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
           viewCount: 0,
+          category: params.category,
         };
 
         const data = await PostService.updatePost(post, req.params.id);
@@ -84,6 +86,7 @@ class PostController {
         text: params.text,
         imageUrl: params.imageUrl,
         viewCount: params.viewCount,
+        category: params.category,
       };
 
       const data = await PostService.updatePost(post, req.params.id);
@@ -107,6 +110,23 @@ class PostController {
     try {
       let post = await PostService.getPostById(req.params.id);
       return res.json({ post });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getByPage(req, res, next) {
+    try {
+      const reqPage = req.query.page > 0 ? req.query.page : 1;
+      const collections = await PostService.getAll();
+      const limits = 5;
+      const page = (reqPage - 1) * limits;
+      const countPage = Math.round(collections.length / limits);
+      const post = await PostService.getByPage(page, limits);
+      if (countPage === 0) {
+        return res.json({ pages: 1, post });
+      }
+      return res.json({ pages: countPage, post });
     } catch (e) {
       next(e);
     }
