@@ -1,15 +1,13 @@
 module.exports = class UserDto {
-    instaName;
-    id;
-    name;
-    activated;
-    status
+  id;
+  name;
+  email;
+  password;
 
-    constructor(model) {
-        this.instaName = model.instaName;
-        this.id = model.id;
-        this.name = model.name;
-        this.activated = model.activated;
-        this.status = model.status
-    }
-}
+  constructor(model) {
+    this.id = model.id;
+    this.name = model.name;
+    this.email = model.email;
+    this.password = model.password;
+  }
+};

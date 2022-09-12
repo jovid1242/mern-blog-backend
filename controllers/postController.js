@@ -119,6 +119,9 @@ class PostController {
   async getOne(req, res, next) {
     try {
       let post = await PostService.getPostById(req.params.id);
+      if (post == null) {
+        return res.json({ post: {} });
+      }
       return res.json({ post });
     } catch (e) {
       next(e);
@@ -131,15 +134,15 @@ class PostController {
       const collections = await PostService.getAll();
       const limits = 5;
       const page = (reqPage - 1) * limits;
-      const countPage = Math.round(collections.length / limits);
+      const countPage = Math.ceil(collections.length / limits);
       const post = await PostService.getByPage(page, limits);
-      let sortPost = post.rows.sort(function (a, b) {
-        return a.createdAt == b.createdAt
-          ? 0
-          : a.createdAt > b.createdAt
-          ? -1
-          : 1;
-      });
+      // let sortPost = post.rows.sort(function (a, b) {
+      //   return a.createdAt == b.createdAt
+      //     ? 0
+      //     : a.createdAt > b.createdAt
+      //     ? -1
+      //     : 1;
+      // });
       if (countPage === 0) {
         return res.json({
           pages: 1,
