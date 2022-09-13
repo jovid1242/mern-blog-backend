@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "blog",
+    "username": "repost",
+    "password": "jovid02",
+    "database": "repost",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "super_admin_repost0002",
+    "password": "23e23dfvdfvdfv4",
+    "database": "database_production_repost_blog",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
