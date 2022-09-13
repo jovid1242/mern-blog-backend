@@ -27,6 +27,7 @@ router.post(
   authController.login
 );
 
+//
 // post
 router.get("/posts", postController.getAll);
 router.get("/category/:category_id", postController.getPostsByCategory);

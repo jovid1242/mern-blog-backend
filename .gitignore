@@ -1,5 +1,4 @@
 node_modules/
 .idea
 # .env
-# config/config.json
-# uploads/
+# config/config.json 
