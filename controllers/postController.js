@@ -32,6 +32,16 @@ class PostController {
     }
   }
 
+  async viewControll(req, res, next) {
+    try {
+      const post = await PostService.getPostById(req.params.id);
+      const result = await PostService.viewUpdate(post, req.params.id);
+      return res.json(result);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async create(req, res, next) {
     try {
       let params = req.body;

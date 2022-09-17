@@ -41,6 +41,12 @@ class PostService {
     });
   }
 
+  async viewUpdate(post, id) {
+    return Posts.findOne({ where: { id: id } }).then(function (obj) {
+      if (obj) return obj.update({ viewCount: post.viewCount + 1 });
+    });
+  }
+
   async deletePost(id) {
     return Posts.destroy({ where: { id: id } });
   }

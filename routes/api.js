@@ -27,7 +27,6 @@ router.post(
   authController.login
 );
 
-//
 // post
 router.get("/posts", postController.getAll);
 router.get("/category/:category_id", postController.getPostsByCategory);
@@ -38,6 +37,7 @@ router.get("/posts-resent", postController.getResentPosts);
 router.post("/post", postController.create);
 router.delete("/posts/:id", postController.remove);
 router.patch("/posts/:id", postController.update);
+router.post("/post-view/:id", postController.viewControll);
 
 // category
 router.get("/categories", categoryController.getAll);
