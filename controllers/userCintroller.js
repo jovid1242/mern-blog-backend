@@ -43,6 +43,33 @@ class userController {
       next(e);
     }
   }
+
+  async getUsers(req, res, next) {
+    try {
+      let users = await UserService.getAll();
+      return res.json({ users });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async remove(req, res, next) {
+    try {
+      if (
+        req.body.secret_key ===
+        "super_admin_blog#$3543534545645645ddfb565sdbdtb"
+      ) {
+        await PostService.removeuser(req.params.id);
+        return res.json({ ok: req.params.id });
+      } else {
+        return res
+          .status(412)
+          .json({ message: "Вы не имеете права удалить автора" });
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new userController();

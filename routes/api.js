@@ -29,7 +29,6 @@ router.post(
 
 // post
 router.get("/posts", postController.getAll);
-router.get("/category/:category_id", postController.getPostsByCategory);
 router.get("/posts/:id", postController.getOne);
 router.get("/posts-page", postController.getByPage);
 router.get("/posts-popular", postController.getPopularPosts);
@@ -38,6 +37,9 @@ router.post("/post", postController.create);
 router.delete("/posts/:id", postController.remove);
 router.patch("/posts/:id", postController.update);
 router.post("/post-view/:id", postController.viewControll);
+
+router.get("/category/:category_id", postController.getPostsByCategory);
+router.get("/author/:user_id", postController.getPostsByCategory);
 
 // category
 router.get("/categories", categoryController.getAll);
@@ -49,6 +51,7 @@ router.patch("/categories/:id", categoryController.update);
 // users
 router.get("/users", userController.getAll);
 router.get("/user/:id", userController.getUser);
+router.delete("/user/:id", userController.remove);
 router.get("/get_users", userController.getByPage);
 
 // banner

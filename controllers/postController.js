@@ -1,4 +1,5 @@
 const PostDto = require("../dtos/postDto");
+const fs = require("fs");
 const PostService = require("../services/posts/PostService");
 
 const ApiError = require("../exceptions/apiError");
@@ -24,6 +25,15 @@ class PostController {
   }
 
   async getPostsByCategory(req, res, next) {
+    try {
+      const posts = await PostService.getByAuthor(req.params.user_id);
+      return res.json({ posts });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getPostsByAuthor(req, res, next) {
     try {
       const posts = await PostService.getByCategory(req.params.category_id);
       return res.json({ posts });
@@ -64,6 +74,7 @@ class PostController {
         imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
         viewCount: 0,
         category: params.category,
+        user_id: params.user_id,
       };
 
       const data = await PostService.createPost(post);
@@ -96,6 +107,7 @@ class PostController {
           imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
           viewCount: 0,
           category: params.category,
+          user_id: params.user_id,
         };
 
         const data = await PostService.updatePost(post, req.params.id);
@@ -108,6 +120,7 @@ class PostController {
         imageUrl: params.imageUrl,
         viewCount: params.viewCount,
         category: params.category,
+        user_id: params.user_id,
       };
 
       const data = await PostService.updatePost(post, req.params.id);
@@ -119,8 +132,18 @@ class PostController {
 
   async remove(req, res, next) {
     try {
-      let post = await PostService.deletePost(req.params.id);
-      return res.json({ post });
+      let post = await PostService.getPostById(req.params.id);
+      let pathFile =
+        path.join(__dirname + "/../uploads", "images/") +
+        post.imageUrl.split("/")[5];
+      fs.unlink(pathFile, (err) => {
+        if (err) {
+          return res.json({ message: "Файл не удаленно" });
+        } else {
+          PostService.deletePost(req.params.id);
+          return res.json({ post });
+        }
+      });
     } catch (e) {
       next(e);
     }

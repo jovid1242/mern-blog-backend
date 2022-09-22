@@ -4,6 +4,8 @@ module.exports = class PostDto {
   text;
   imageUrl;
   viewCount;
+  category;
+  user_id;
 
   constructor(model) {
     this.id = model.id;
@@ -11,5 +13,7 @@ module.exports = class PostDto {
     this.text = model.text;
     this.imageUrl = model.imageUrl;
     this.viewCount = model.viewCount;
+    this.category = model.category;
+    this.user_id = model.user_id;
   }
 };

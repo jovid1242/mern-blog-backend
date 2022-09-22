@@ -14,6 +14,14 @@ class PostService {
     });
   }
 
+  async getByAuthor(user_id) {
+    return await Posts.findAndCountAll({
+      where: {
+        user_id: user_id,
+      },
+    });
+  }
+
   async getCategoryByPage(category_id, page, limit) {
     return await Posts.findAndCountAll({
       offset: page,

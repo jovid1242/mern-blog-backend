@@ -48,7 +48,20 @@ class UserService {
   }
 
   async getUser(id) {
-    return await User.findOne({ where: { id } });
+    return await User.findOne({
+      where: { id },
+      attributes: { exclude: ["password"] },
+    });
+  }
+
+  async getAll() {
+    return await User.findAll({
+      attributes: { exclude: ["password"] },
+    });
+  }
+
+  async removeUser(id) {
+    return User.destroy({ where: { id: id } });
   }
 }
 
