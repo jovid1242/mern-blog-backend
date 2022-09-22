@@ -26,7 +26,7 @@ class PostController {
 
   async getPostsByCategory(req, res, next) {
     try {
-      const posts = await PostService.getByAuthor(req.params.user_id);
+      const posts = await PostService.getByCategory(req.params.category_id);
       return res.json({ posts });
     } catch (e) {
       next(e);
@@ -35,7 +35,7 @@ class PostController {
 
   async getPostsByAuthor(req, res, next) {
     try {
-      const posts = await PostService.getByCategory(req.params.category_id);
+      const posts = await PostService.getByAuthor(req.params.user_id);
       return res.json({ posts });
     } catch (e) {
       next(e);
@@ -165,7 +165,7 @@ class PostController {
     try {
       const reqPage = req.query.page > 0 ? req.query.page : 1;
       const collections = await PostService.getAll();
-      const limits = 5;
+      const limits = 20;
       const page = (reqPage - 1) * limits;
       const countPage = Math.ceil(collections.length / limits);
       const post = await PostService.getByPage(page, limits);
