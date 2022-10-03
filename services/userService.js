@@ -50,7 +50,7 @@ class UserService {
   async getUser(id) {
     return await User.findOne({
       where: { id },
-      attributes: { exclude: ["password"] },
+      attributes: { exclude: ["password", "email"] },
     });
   }
 

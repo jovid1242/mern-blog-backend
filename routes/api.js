@@ -39,7 +39,7 @@ router.patch("/posts/:id", postController.update);
 router.post("/post-view/:id", postController.viewControll);
 
 router.get("/category/:category_id", postController.getPostsByCategory);
-router.get("/author/:user_id", postController.getPostsByCategory);
+router.get("/author/posts/:user_id", postController.getPostsByAuthor);
 
 // category
 router.get("/categories", categoryController.getAll);

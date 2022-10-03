@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "repost",
-    "password": "jovid02",
-    "database": "repost",
+    "username": "root",
+    "password": null,
+    "database": "blog",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -14,9 +14,9 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "super_admin_repost0002",
-    "password": "23e23dfvdfvdfv4",
-    "database": "database_production_repost_blog",
+    "username": "repost",
+    "password": "jovid02",
+    "database": "repost",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

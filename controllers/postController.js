@@ -71,7 +71,7 @@ class PostController {
       const post = {
         title: params.title,
         text: params.text,
-        imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
+        imageUrl: newNameFile,
         viewCount: 0,
         category: params.category,
         user_id: params.user_id,
@@ -104,7 +104,7 @@ class PostController {
         const post = {
           title: params.title,
           text: params.text,
-          imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
+          imageUrl: newNameFile,
           viewCount: 0,
           category: params.category,
           user_id: params.user_id,
@@ -165,7 +165,7 @@ class PostController {
     try {
       const reqPage = req.query.page > 0 ? req.query.page : 1;
       const collections = await PostService.getAll();
-      const limits = 20;
+      const limits = 5;
       const page = (reqPage - 1) * limits;
       const countPage = Math.ceil(collections.length / limits);
       const post = await PostService.getByPage(page, limits);
