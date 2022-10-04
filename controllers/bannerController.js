@@ -1,6 +1,7 @@
 const BannerService = require("../services/banner/bannerService");
 
 const ApiError = require("../exceptions/apiError");
+const fs = require("fs");
 const path = require("path");
 const uuid = require("uuid");
 
