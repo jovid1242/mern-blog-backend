@@ -56,6 +56,7 @@ router.get("/get_users", userController.getByPage);
 
 // banner
 router.post("/banner", bannerController.create);
+router.delete("/banner/:id", bannerController.remove);
 router.get("/banners", bannerController.getAll);
 
 // image file

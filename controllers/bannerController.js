@@ -41,7 +41,7 @@ class BannerController {
       const post = {
         title: params.title,
         text: params.text,
-        imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
+        imageUrl: newNameFile,
         viewCount: 0,
         category: params.category,
       };
@@ -73,7 +73,7 @@ class BannerController {
         const post = {
           title: params.title,
           text: params.text,
-          imageUrl: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
+          imageUrl: newNameFile,
           viewCount: 0,
           category: params.category,
         };
@@ -101,6 +101,25 @@ class BannerController {
     try {
       let post = await BannerService.deletePost(req.params.id);
       return res.json({ post });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async remove(req, res, next) {
+    try {
+      let banner = await BannerService.getById(req.params.id);
+      let pathFile =
+        path.join(__dirname + "/../uploads", "images/") +
+        banner.imageUrl.split("/")[5];
+      fs.unlink(pathFile, (err) => {
+        if (err) {
+          return res.json({ message: "Файл не удаленно" });
+        } else {
+          BannerService.deletePost(req.params.id);
+          return res.json({ banner });
+        }
+      });
     } catch (e) {
       next(e);
     }

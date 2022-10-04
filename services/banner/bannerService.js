@@ -16,6 +16,12 @@ class BannerService {
     });
   }
 
+  async getById(id) {
+    return await Banner.findOne({
+      where: { id },
+    });
+  }
+
   async deletePost(id) {
     return Banner.destroy({ where: { id: id } });
   }
