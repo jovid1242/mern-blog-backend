@@ -132,18 +132,20 @@ class PostController {
 
   async remove(req, res, next) {
     try {
-      let post = await PostService.getPostById(req.params.id);
-      let pathFile =
-        path.join(__dirname + "/../uploads", "images/") +
-        post.imageUrl.split("/")[5];
-      fs.unlink(pathFile, (err) => {
-        if (err) {
-          return res.json({ message: "Файл не удаленно" });
-        } else {
-          PostService.deletePost(req.params.id);
-          return res.json({ post });
-        }
-      });
+      let post = await PostService.deletePost(req.params.id);
+      return res.json({ post });
+      // let post = await PostService.getPostById(req.params.id);
+      // let pathFile =
+      //   path.join(__dirname + "/../uploads", "images/") +
+      //   post.imageUrl.split("/")[5];
+      // fs.unlink(pathFile, (err) => {
+      //   if (err) {
+      //     return res.json({ message: "Файл не удаленно" });
+      //   } else {
+      //     PostService.deletePost(req.params.id);
+      //     return res.json({ post });
+      //   }
+      // });
     } catch (e) {
       next(e);
     }
