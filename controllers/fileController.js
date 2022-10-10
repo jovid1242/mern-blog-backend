@@ -19,7 +19,7 @@ class FileController {
       );
 
       return res.json({
-        file: `${process.env.DOMEN_URL}/api/image/${newNameFile}`,
+        file: `${process.env.DOMEN_URL}/image/${newNameFile}`,
       });
     } catch (e) {
       next(e);
