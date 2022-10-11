@@ -167,7 +167,7 @@ class PostController {
     try {
       const reqPage = req.query.page > 0 ? req.query.page : 1;
       const collections = await PostService.getAll();
-      const limits = 5;
+      const limits = 20;
       const page = (reqPage - 1) * limits;
       const countPage = Math.ceil(collections.length / limits);
       const post = await PostService.getByPage(page, limits);
