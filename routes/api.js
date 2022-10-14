@@ -50,9 +50,10 @@ router.patch("/categories/:id", categoryController.update);
 
 // users
 router.get("/users", userController.getAll);
-router.get("/user/:id", userController.getUser);
+router.get("/user/:id", userController.getUserById);
 router.delete("/user/:id", userController.remove);
 router.get("/get_users", userController.getByPage);
+router.get("/auth/me", authMiddleware, userController.getUser);
 
 // banner
 router.post("/banner", bannerController.create);

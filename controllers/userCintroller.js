@@ -37,6 +37,17 @@ class userController {
 
   async getUser(req, res, next) {
     try {
+      // let user = await UserService.getUser(req.user);
+      return res.json({
+        user: { id: req.user.id, name: req.user.name, email: req.user.email },
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getUserById(req, res, next) {
+    try {
       let user = await UserService.getUser(req.params.id);
       return res.json({ user });
     } catch (e) {
