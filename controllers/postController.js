@@ -151,6 +151,20 @@ class PostController {
     }
   }
 
+  async removeAuthorPosts(req, res, next) {
+    try {
+      const post = await PostService.getPostById(req.params.id);
+      if (req.user.id === post.user_id) {
+        await PostService.deletePost(post.id);
+        return res.json({ ok: "Успешно удалено" });
+      } else {
+        return res.json({ message: "Нет доступа" });
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getOne(req, res, next) {
     try {
       let post = await PostService.getPostById(req.params.id);
@@ -158,6 +172,18 @@ class PostController {
         return res.json({ post: {} });
       }
       return res.json({ post });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getAuthorPosts(req, res, next) {
+    try {
+      let posts = await PostService.authorPosts(req.user.id);
+      if (posts == null) {
+        return res.json({ post: {} });
+      }
+      return res.json({ posts });
     } catch (e) {
       next(e);
     }

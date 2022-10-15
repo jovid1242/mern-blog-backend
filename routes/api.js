@@ -29,7 +29,7 @@ router.post(
 
 // post
 router.get("/posts", postController.getAll);
-router.get("/posts/:id", postController.getOne);
+router.get("/posts/:title/:id", postController.getOne);
 router.get("/posts-page", postController.getByPage);
 router.get("/posts-popular", postController.getPopularPosts);
 router.get("/posts-resent", postController.getResentPosts);
@@ -54,6 +54,14 @@ router.get("/user/:id", userController.getUserById);
 router.delete("/user/:id", userController.remove);
 router.get("/get_users", userController.getByPage);
 router.get("/auth/me", authMiddleware, userController.getUser);
+
+// author
+router.get("/author/posts", authMiddleware, postController.getAuthorPosts);
+router.delete(
+  "/author/post/:id",
+  authMiddleware,
+  postController.removeAuthorPosts
+);
 
 // banner
 router.post("/banner", bannerController.create);

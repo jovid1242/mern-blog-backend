@@ -38,6 +38,12 @@ class PostService {
     });
   }
 
+  async authorPosts(id) {
+    return await Posts.findAndCountAll({
+      where: { user_id: id },
+    });
+  }
+
   async createPost(value) {
     return await Posts.create(value);
   }
