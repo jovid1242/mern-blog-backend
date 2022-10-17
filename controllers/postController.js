@@ -177,6 +177,18 @@ class PostController {
     }
   }
 
+  async getAuthorPostsAll(req, res, next) {
+    try {
+      let posts = await PostService.authorPosts(req.params.id);
+      if (posts == null) {
+        return res.json({ post: {} });
+      }
+      return res.json({ posts });
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getAuthorPosts(req, res, next) {
     try {
       let posts = await PostService.authorPosts(req.user.id);
