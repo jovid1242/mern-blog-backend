@@ -89,6 +89,7 @@ class userController {
           social: params.social,
           imageUrl: newNameFile,
         };
+        console.log("req.user.id", req.user.id);
 
         let users = await UserService.addInfo({ ...info }, req.user.id);
         return res.json({ ...users });
