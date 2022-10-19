@@ -48,9 +48,6 @@ class UserService {
   }
 
   async addInfo(value, id) {
-    // return User.update({ where: { id: id } }).then(function (obj) {
-    //   if (obj) return obj.update(value);
-    // });
     return User.update(value, {
       where: { id: id },
     });
