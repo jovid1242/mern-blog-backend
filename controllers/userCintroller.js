@@ -103,10 +103,10 @@ class userController {
         imageUrl: newNameFile,
       };
       let users = await UserService.addInfo(
-        { ...info, ...req.user },
+        { ...req.user, ...info },
         req.user.id
       );
-      return res.json({ ...info });
+      return res.json({ users });
     } catch (e) {
       next(e);
     }
