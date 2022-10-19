@@ -54,6 +54,7 @@ router.get("/user/:id", userController.getUserById);
 router.delete("/user/:id", userController.remove);
 router.get("/get_users", userController.getByPage);
 router.get("/auth/me", authMiddleware, userController.getUser);
+router.post("/user/info", authMiddleware, userController.updateInfo);
 
 // author
 router.get("/author/posts", authMiddleware, postController.getAuthorPosts);

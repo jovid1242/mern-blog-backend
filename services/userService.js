@@ -47,6 +47,12 @@ class UserService {
     });
   }
 
+  async addInfo(value, id) {
+    return User.findOne({ where: { id: id } }).then(function (obj) {
+      if (obj) return obj.update(value);
+    });
+  }
+
   async getUser(id) {
     return await User.findOne({
       where: { id },

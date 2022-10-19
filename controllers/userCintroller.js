@@ -2,6 +2,9 @@ const userDto = require("../dtos/userDto");
 const ApiError = require("../exceptions/apiError");
 const UserService = require("../services/userService");
 
+const path = require("path");
+const uuid = require("uuid");
+
 class userController {
   async getAll(req, res, next) {
     try {
@@ -39,7 +42,7 @@ class userController {
     try {
       // let user = await UserService.getUser(req.user);
       return res.json({
-        user: { id: req.user.id, name: req.user.name, email: req.user.email },
+        user: req.user,
       });
     } catch (e) {
       next(e);
@@ -59,6 +62,51 @@ class userController {
     try {
       let users = await UserService.getAll();
       return res.json({ users });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async updateInfo(req, res, next) {
+    try {
+      let params = req.body;
+      if (req.files !== null) {
+        let file = req.files.image;
+        const typeImage = file.mimetype.split("/").splice(1, 1);
+        const newNameFile = `${uuid.v4()}.${typeImage}`;
+
+        file.mv(
+          path.join(__dirname + "/../uploads", "images/") + newNameFile,
+          (err) => {
+            if (err) {
+              throw ApiError.BadRequest("Ошибка при загрузка файла");
+            }
+          }
+        );
+
+        const info = {
+          info: params.info,
+          social: params.social,
+          imageUrl: newNameFile,
+        };
+
+        let users = await UserService.addInfo(
+          { ...req.user, ...info },
+          req.user.id
+        );
+        return res.json({ ...users });
+      }
+
+      const info = {
+        info: params.info,
+        social: params.social,
+        imageUrl: newNameFile,
+      };
+      let users = await UserService.addInfo(
+        { ...info, ...req.user },
+        req.user.id
+      );
+      return res.json({ ...info });
     } catch (e) {
       next(e);
     }
