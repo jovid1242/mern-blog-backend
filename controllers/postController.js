@@ -74,7 +74,7 @@ class PostController {
         imageUrl: newNameFile,
         viewCount: 0,
         category: params.category,
-        user_id: params.user_id,
+        user_id: req.user.id,
       };
 
       const data = await PostService.createPost(post);

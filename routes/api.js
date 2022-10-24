@@ -34,7 +34,7 @@ router.get("/posts/:title/:id", postController.getOne);
 router.get("/posts-page", postController.getByPage);
 router.get("/posts-popular", postController.getPopularPosts);
 router.get("/posts-resent", postController.getResentPosts);
-router.post("/post", postController.create);
+router.post("/post", authMiddleware, postController.create);
 router.delete("/posts/:id", postController.remove);
 router.patch("/posts/:id", postController.update);
 router.post("/post-view/:id", postController.viewControll);
