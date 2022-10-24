@@ -51,6 +51,10 @@ class UserService {
     return User.update(value, {
       where: { id: id },
     });
+
+    // return User.update({ where: { id: id } }).then(function (obj) {
+    //   if (obj) return obj.update(value);
+    // });
   }
 
   async getUser(id) {
@@ -68,6 +72,23 @@ class UserService {
 
   async removeUser(id) {
     return User.destroy({ where: { id: id } });
+  }
+
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnauthorizedError();
+    }
+    const user = await User.findById(userData.id);
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return { ...tokens, user: userDto };
   }
 }
 

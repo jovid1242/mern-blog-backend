@@ -26,6 +26,7 @@ router.post(
   body("password").isLength({ min: 3, max: 32 }),
   authController.login
 );
+router.get("/refresh", authController.refresh);
 
 // post
 router.get("/posts", postController.getAll);

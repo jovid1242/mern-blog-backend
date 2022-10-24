@@ -240,7 +240,7 @@ class PostController {
           : -1;
       });
 
-      return res.json({ popularPosts: arr.slice(0, 3) });
+      return res.json({ popularPosts: arr.slice(0, 4) });
     } catch (e) {
       next(e);
     }
@@ -258,7 +258,7 @@ class PostController {
           : 1;
       });
 
-      return res.json({ resentPosts: arr.slice(0, 3) });
+      return res.json({ resentPosts: arr.slice(0, 4) });
     } catch (e) {
       next(e);
     }
