@@ -11,9 +11,6 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
       },
-      category_id: {
-        type: Sequelize.INTEGER,
-      },
       title: {
         type: Sequelize.STRING,
       },
@@ -24,9 +21,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       view: {
-        type: Sequelize.INTEGER,
-      },
-      category: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

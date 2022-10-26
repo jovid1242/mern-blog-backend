@@ -15,11 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   Post.init(
     {
       user_id: DataTypes.INTEGER,
-      category_id: DataTypes.INTEGER,
       title: DataTypes.STRING,
       description: DataTypes.TEXT,
       picture: DataTypes.STRING,
-      viewCount: DataTypes.INTEGER,
+      view: DataTypes.INTEGER,
     },
     {
       sequelize,
