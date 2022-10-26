@@ -1,15 +1,15 @@
 {
-  "development": {
+  "development2": {
     "username": "repost",
     "password": "jovid02",
     "database": "repost",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "development2": {
+  "development": {
     "username": "root",
     "password": null,
-    "database": "blog",
+    "database": "social",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
