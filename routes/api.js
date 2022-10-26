@@ -10,7 +10,7 @@ const authController = require("../controllers/authController");
 const postController = require("../controllers/postController");
 const categoryController = require("../controllers/categoryController");
 const fileController = require("../controllers/fileController");
-const userController = require("../controllers/userCintroller");
+const userController = require("../controllers/userController");
 const bannerController = require("../controllers/bannerController");
 
 // auth routes
@@ -56,7 +56,7 @@ router.get("/user/:id", userController.getUserById);
 router.delete("/user/:id", userController.remove);
 router.get("/get_users", userController.getByPage);
 router.get("/auth/me", authMiddleware, userController.getUser);
-router.post("/user/info", authMiddleware, userController.updateInfo);
+router.post("/user/edit", authMiddleware, userController.updateInfo);
 
 // author
 router.get("/author/posts", authMiddleware, postController.getAuthorPosts);

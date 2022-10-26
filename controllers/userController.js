@@ -85,26 +85,26 @@ class userController {
         );
 
         const info = {
-          info: params.info,
-          social: params.social,
-          imageUrl: newNameFile,
+          username: params.username,
+          bio: params.bio,
+          picture: newNameFile,
         };
-        console.log("req.user.id", req.user.id);
 
-        let users = await UserService.addInfo({ ...info }, req.user.id);
-        return res.json({ ...users });
+        let result = await UserService.editInfo({ ...info }, req.user.id);
+        return res.json({ ok: result });
       }
 
       const info = {
-        info: params.info,
-        social: params.social,
-        imageUrl: newNameFile,
+        username: params.username,
+        bio: params.bio,
+        picture: params.picture,
       };
-      let users = await UserService.addInfo(
+
+      let result = await UserService.editInfo(
         { ...req.user, ...info },
         req.user.id
       );
-      return res.json({ users });
+      return res.json({ ok: result });
     } catch (e) {
       next(e);
     }

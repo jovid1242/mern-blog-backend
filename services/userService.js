@@ -47,7 +47,7 @@ class UserService {
     });
   }
 
-  async addInfo(value, id) {
+  async editInfo(value, id) {
     return User.update(value, {
       where: { id: id },
     });
