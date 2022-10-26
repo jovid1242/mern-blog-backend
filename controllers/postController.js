@@ -70,10 +70,9 @@ class PostController {
 
       const post = {
         title: params.title,
-        text: params.text,
-        imageUrl: newNameFile,
-        viewCount: 0,
-        category: params.category,
+        description: params.description,
+        picture: newNameFile,
+        view: 0,
         user_id: req.user.id,
       };
 
@@ -103,11 +102,8 @@ class PostController {
 
         const post = {
           title: params.title,
-          text: params.text,
-          imageUrl: newNameFile,
-          viewCount: 0,
-          category: params.category,
-          user_id: params.user_id,
+          description: params.description,
+          picture: newNameFile,
         };
 
         const data = await PostService.updatePost(post, req.params.id);
@@ -116,11 +112,8 @@ class PostController {
 
       const post = {
         title: params.title,
-        text: params.text,
-        imageUrl: params.imageUrl,
-        viewCount: params.viewCount,
-        category: params.category,
-        user_id: params.user_id,
+        description: params.description,
+        picture: params.picture,
       };
 
       const data = await PostService.updatePost(post, req.params.id);

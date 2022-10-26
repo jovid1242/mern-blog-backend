@@ -37,7 +37,7 @@ router.get("/posts-popular", postController.getPopularPosts);
 router.get("/posts-resent", postController.getResentPosts);
 router.post("/post", authMiddleware, postController.create);
 router.delete("/posts/:id", postController.remove);
-router.patch("/posts/:id", postController.update);
+router.patch("/post/:id", postController.update);
 router.post("/post-view/:id", postController.viewControll);
 
 router.get("/category/:category_id", postController.getPostsByCategory);
