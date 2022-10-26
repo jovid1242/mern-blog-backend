@@ -1,21 +1,23 @@
 module.exports = class UserDto {
   id;
-  name;
+  username;
   email;
   password;
-  info;
+  bio;
   status;
-  social;
-  imageUrl;
+  picture;
+  followers;
+  following;
 
   constructor(model) {
     this.id = model.id;
-    this.name = model.name;
+    this.username = model.username;
     this.email = model.email;
     this.password = model.password;
-    this.info = model.info;
+    this.bio = model.bio;
     this.status = model.status;
-    this.social = model.social;
-    this.imageUrl = model.imageUrl;
+    this.picture = model.picture;
+    this.follower = model.followers;
+    this.following = model.following;
   }
 };

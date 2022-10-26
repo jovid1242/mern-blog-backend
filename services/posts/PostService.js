@@ -1,5 +1,5 @@
 const db = require("../../models");
-const Posts = db.Posts;
+const Posts = db.Post;
 
 class PostService {
   async getAll() {

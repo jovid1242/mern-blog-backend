@@ -11,8 +11,8 @@ class UserController {
           ApiError.ValidationError("Ошибка при валидации", errors.array())
         );
       }
-      const { name, email, password } = req.body;
-      const userData = await userService.registrate(name, email, password);
+      const { username, email, password } = req.body;
+      const userData = await userService.registrate(username, email, password);
       res.cookie("token", userData.accessToken, {
         httpOnly: true,
       });

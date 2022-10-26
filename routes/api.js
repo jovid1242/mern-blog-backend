@@ -13,9 +13,10 @@ const fileController = require("../controllers/fileController");
 const userController = require("../controllers/userCintroller");
 const bannerController = require("../controllers/bannerController");
 
+// auth routes
 router.post(
   "/register",
-  body("name").isLength({ min: 3 }),
+  body("username").isLength({ min: 3 }),
   body("email").isLength({ min: 3 }),
   body("password").isLength({ min: 3, max: 32 }),
   authController.registration
