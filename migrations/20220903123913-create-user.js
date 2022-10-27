@@ -23,12 +23,6 @@ module.exports = {
       bio: {
         type: Sequelize.STRING,
       },
-      followers: {
-        type: Sequelize.INTEGER,
-      },
-      following: {
-        type: Sequelize.INTEGER,
-      },
       picture: {
         type: Sequelize.STRING,
       },

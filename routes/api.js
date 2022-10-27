@@ -12,6 +12,8 @@ const categoryController = require("../controllers/categoryController");
 const fileController = require("../controllers/fileController");
 const userController = require("../controllers/userController");
 const bannerController = require("../controllers/bannerController");
+const likeController = require("../controllers/likeController");
+const followController = require("../controllers/followController");
 
 // auth routes
 router.post(
@@ -39,6 +41,15 @@ router.post("/post", authMiddleware, postController.create);
 router.delete("/posts/:id", postController.remove);
 router.patch("/post/:id", postController.update);
 router.post("/post-view/:id", postController.viewControll);
+
+// like post
+router.post("/post/:id/like", authMiddleware, likeController.liked);
+router.post("/post/:id/unlike", authMiddleware, likeController.unliked);
+
+// follow FollowController
+router.post("/user/:id/follow", authMiddleware, followController.following);
+router.post("/user/:id/unfollow", authMiddleware, followController.unfollowing);
+router.get("/user/follow", authMiddleware, followController.getAll);
 
 router.get("/category/:category_id", postController.getPostsByCategory);
 router.get("/author/posts/:user_id", postController.getPostsByAuthor);
