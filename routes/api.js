@@ -12,6 +12,8 @@ const categoryController = require("../controllers/categoryController");
 const fileController = require("../controllers/fileController");
 const userController = require("../controllers/userCintroller");
 const bannerController = require("../controllers/bannerController");
+const tagController = require("../controllers/tagController");
+const postTagsController = require("../controllers/postTagsController");
 
 router.post(
   "/register",
@@ -70,6 +72,18 @@ router.delete(
 router.post("/banner", bannerController.create);
 router.delete("/banner/:id", bannerController.remove);
 router.get("/banners", bannerController.getAll);
+
+// tags
+router.post("/tags/create", tagController.create);
+router.put("/tags/update/:id", tagController.update);
+router.delete("/tags/delete/:id", tagController.remove);
+router.get("/tags", tagController.getAll);
+
+// posts-tags
+router.post("/post-tags/create", postTagsController.create);
+router.put("/post-tags/update/:id", postTagsController.update);
+router.delete("/post-tags/delete/:id", postTagsController.remove);
+router.get("/post-tags", postTagsController.getAll);
 
 // image file
 router.get("/image/:img", (req, res) => {
