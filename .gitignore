@@ -1,4 +1,9 @@
 node_modules/
 .idea
+/node_modules
+/.pnp
+.pnp.js
+
+/uploads
 # .env
 # config/config.json 
